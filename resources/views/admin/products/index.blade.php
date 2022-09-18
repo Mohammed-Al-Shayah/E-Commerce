@@ -33,14 +33,14 @@
             <td>{{ $product->id }}</td>
             <td>{{ $product->trans_name }}</td>
             <td><img width="80" src="{{ asset('uploads/products/'.$product->image) }}" alt=""></td>
-            <td>{{ $product-> price}}</td>
+            <td>{{ $product-> salary}}</td>
             <td>{{ $product-> sale_price}}</td>
             <td>{{ $product-> quantity}}</td>
-            <td>{{ $product-> category}}</td>
+            <td>{{ $product-> category->trans_name}}</td>
             <td>{{ $product->created_at ? $product->created_at->diffForHumans() : '' }}</td>
             <td>
-                <a class="btn btn-sm btn-primary" href="{{ route('admin.products.edit', $product->id) }}"><i class="fas fa-edit"></i></a>
-                <form class="d-inline" action="{{ route('admin.products.destroy', $product->id) }}" method="POST">
+                <a class="btn btn-sm btn-primary" href="{{ route('admin.Products.edit', $product->id) }}"><i class="fas fa-edit"></i></a>
+                <form class="d-inline" action="{{ route('admin.Products.destroy', $product->id) }}" method="POST">
                     @csrf
                     @method('delete')
                     <button class="btn btn-sm btn-danger" onclick="return confirm('Are you sure')"><i class="fas fa-trash"></i></button>

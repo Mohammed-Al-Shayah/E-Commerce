@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\adminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\SiteController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::prefix(LaravelLocalization::setLocale())->group(function ()
@@ -24,3 +25,12 @@ Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::view('no-access','no_access');
+
+//Routes site
+Route::get('/', [SiteController::class, 'index'])->name('site.index');
+Route::get('/categories', [SiteController::class, 'categories'])->name('site.categories');
+Route::get('/product', [SiteController::class, 'product'])->name('site.product');
+Route::get('/cart', [SiteController::class, 'cart'])->name('site.cart');
+Route::get('/checkOut', [SiteController::class, 'checkOut'])->name('site.checkOut');
+Route::get('/contact', [SiteController::class, 'contact'])->name('site.contact');
+

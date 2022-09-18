@@ -51,7 +51,7 @@ class ProductController extends Controller
             'image' => 'required',
             'content_en' => 'required',
             'content_ar' => 'required',
-            'price' => 'required',
+            'salary' => 'required',
             'quantity' => 'required',
             'category_id' => 'required',
         ]);
@@ -70,20 +70,20 @@ class ProductController extends Controller
             'ar' => $request->content_ar,
         ], JSON_UNESCAPED_UNICODE);
 
-        $slugcount = Product::where('slug','like', '%'. Str::slug($request->name_en) . '%')->count();
+        // $slugcount = Product::where('slug','like', '%'. Str::slug($request->name_en) . '%')->count();
 
-        $slug = Str::slug($request->name_en);
-        if($slugcount) {
-            $slug = Str::slug($request->name_en).'-'.$slugcount;
-        }
+        // $slug = Str::slug($request->name_en);
+        // if($slugcount) {
+        //     $slug = Str::slug($request->name_en).'-'.$slugcount;
+        // }
 
         // Store Data To Data base
         $product = Product::create([
             'name' => $name,
-            'slug' => $slug,
+            // 'slug' => $slug,
             'image' => $img_name,
             'content' => $content,
-            'price' => $request->price,
+            'salary' => $request->salary,
             'sale_price' => $request->sale_price,
             'quantity' => $request->quantity,
             'category_id' => $request->category_id,
@@ -95,14 +95,14 @@ class ProductController extends Controller
                 $img_name = rand().time().$item->getClientOriginalName();
                 $item->move(public_path('uploads/products'), $img_name);
                 Image::create([
-                    'path'=>$img_name,
-                    'product_id'=>$product
+                    'path'=>$request->path,
+                    'product_id'=>$product->id
                 ]);
             }
         }
 
         // Redirect
-        return redirect()->route('admin.products.index')->with('msg', 'Product created successfully')->with('type', 'success');
+        return redirect()->route('admin.Products.index')->with('msg', 'Product created successfully')->with('type', 'success');
     }
 
     /**
@@ -145,7 +145,7 @@ class ProductController extends Controller
             'image' => 'nullable',
             'content_en' => 'required',
             'content_ar' => 'required',
-            'price' => 'required',
+            'salary' => 'required',
             'quantity' => 'required',
             'category_id' => 'required',
         ]);
@@ -174,7 +174,7 @@ class ProductController extends Controller
             'name' => $name,
             'image' => $img_name,
             'content' => $content,
-            'price' => $request->price,
+            'salary' => $request->salary,
             'sale_price' => $request->sale_price,
             'quantity' => $request->quantity,
             'category_id' => $request->category_id,
@@ -188,12 +188,14 @@ class ProductController extends Controller
                 Image::create([
                     'path' => $img_name,
                     'product_id' => $product->id
+
                 ]);
+
             }
         }
 
         // Redirect
-        return redirect()->route('admin.products.index')->with('msg', 'Product updated successfully')->with('type', 'info');
+        return redirect()->route('admin.Products.index')->with('msg', 'Product updated successfully')->with('type', 'info');
     }
 
     /**
@@ -212,7 +214,7 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect()->route('admin.products.index')->with('msg', 'Product deleted successfully')->with('type', 'danger');
+        return redirect()->route('admin.Products.index')->with('msg', 'Product deleted successfully')->with('type', 'danger');
     }
 
     public function delete_image($id)

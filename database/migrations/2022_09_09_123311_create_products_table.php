@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('content');
             $table->string('image');
-            $table->string('salary');
+            $table->double('salary');
             $table->double('sale_price')->nullable();
             $table->integer('quantity')->default(1);
             $table->foreignId('category_id');

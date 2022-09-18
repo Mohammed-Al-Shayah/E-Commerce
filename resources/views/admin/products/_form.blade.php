@@ -40,14 +40,14 @@
     <div class="col-md-6">
         <div class="mb-3">
             <label>English Name</label>
-            <input type="text" name="name_en" placeholder="English Name" class="form-control" value="{{ $product->name_en }}" />
+            <input type="text" name="name_en" placeholder="English Name" class="form-control" value="{{ $product->en_name }}" />
         </div>
     </div>
 
     <div class="col-md-6">
         <div class="mb-3">
             <label>Arabic Name</label>
-            <input type="text" name="name_ar" placeholder="Arabic Name" class="form-control" value="{{ $product->name_ar }}"/>
+            <input type="text" name="name_ar" placeholder="Arabic Name" class="form-control" value="{{ $product->ar_name }}"/>
         </div>
     </div>
 </div>
@@ -87,8 +87,8 @@
 <div class="row">
     <div class="col-md-4">
         <div class="mb-3">
-            <label>Price</label>
-            <input type="text" name="price" placeholder="Price" class="form-control" value="{{ $product->price }}" />
+            <label>salary</label>
+            <input type="text" name="salary" placeholder="Salary" class="form-control" value="{{ $product->salary }}" />
         </div>
     </div>
 
