@@ -1,11 +1,13 @@
 <?php
 
+use App\Models\Slider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\admin\adminController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\admin\adminController;
+use App\Http\Controllers\admin\SliderController;
+use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::prefix(LaravelLocalization::setLocale())->group(function ()
@@ -16,11 +18,13 @@ Route::prefix(LaravelLocalization::setLocale())->group(function ()
          Route::resource('categories',CategoryController::class);
          Route::resource('Products',ProductController::class);
          Route::get('delete-image/{id}',[ProductController::class,'delete_image'])->name('products.delete_image');
+         Route::resource('slider',SliderController::class);
+
     });
-});
 
 
-Auth::routes();
+
+    Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -33,4 +37,8 @@ Route::get('/product', [SiteController::class, 'product'])->name('site.product')
 Route::get('/cart', [SiteController::class, 'cart'])->name('site.cart');
 Route::get('/checkOut', [SiteController::class, 'checkOut'])->name('site.checkOut');
 Route::get('/contact', [SiteController::class, 'contact'])->name('site.contact');
+
+
+});
+
 

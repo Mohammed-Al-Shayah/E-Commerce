@@ -8,4 +8,5 @@ return [
     'orders' => 'Orders',
     'payments' => 'Payments',
     'users' => 'Users',
+    'slider' => 'Slider',
 ];

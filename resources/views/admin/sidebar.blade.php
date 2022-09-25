@@ -40,6 +40,18 @@
                     </ul>
                 </li>
 
+                {{-- slider --}}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="fa fa-heart"></i>
+                        <span>{{ __('site.slider') }}</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('admin.slider.index') }}">All Slider</a></li>
+                        <li><a href="{{ route('admin.slider.create') }}">Add Slider</a></li>
+                    </ul>
+                </li>
+
                 <li>
                     <a href="calendar.html" class=" waves-effect">
                         <i class="fa fa-cart-plus"></i>

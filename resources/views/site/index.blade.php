@@ -1,46 +1,26 @@
-
 @extends('site.master')
 
-@section('title','HOME | '.env('APP_NAME'))
+@section('title', 'HOME | ' . env('APP_NAME'))
 
 @section('content')
     <!-- Hero Slider Begin -->
     <section class="hero-slider">
         <div class="hero-items owl-carousel">
-            <div class="single-slider-item set-bg" data-setbg="{{ asset('siteassets/img/slider-1.jpg') }}">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1>2019</h1>
-                            <h2>Lookbook.</h2>
-                            <a href="#" class="primary-btn">See More</a>
+            @foreach ($slider as $item)
+                <div class="single-slider-item set-bg" data-setbg="{{ asset('uploads/sliders/' . $item->image) }}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h2>{{ $item->trans_name }}</h2>
+                                <a href="#" class="primary-btn">See More</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="single-slider-item set-bg" data-setbg=" {{asset('siteassets/img/slider-2.jpg')}}">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1>2019</h1>
-                            <h2>Lookbook.</h2>
-                            <a href="#" class="primary-btn">See More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="single-slider-item set-bg" data-setbg="{{asset('siteassets/img/slider-3.jpg')}}">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1>2019</h1>
-                            <h2>Lookbook.</h2>
-                            <a href="#" class="primary-btn">See More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+
         </div>
+
     </section>
     <!-- Hero Slider End -->
 
@@ -51,7 +31,7 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="single-features-ads first">
-                            <img src="{{asset('siteassets/img/icons/f-delivery.png')}}" alt="">
+                            <img src="{{ asset('siteassets/img/icons/f-delivery.png') }}" alt="">
                             <h4>Free shipping</h4>
                             <p>Fusce urna quam, euismod sit amet mollis quis, vestibulum quis velit. Vesti bulum mal
                                 esuada aliquet libero viverra cursus. </p>
@@ -59,7 +39,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="single-features-ads second">
-                            <img src="{{asset('siteassets/img/icons/coin.png')}}" alt="">
+                            <img src="{{ asset('siteassets/img/icons/coin.png') }}" alt="">
                             <h4>100% Money back </h4>
                             <p>Urna quam, euismod sit amet mollis quis, vestibulum quis velit. Vesti bulum mal esuada
                                 aliquet libero viverra cursus. </p>
@@ -67,7 +47,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="single-features-ads">
-                            <img src="{{asset('siteassets/img/icons/chat.png')}}" alt="">
+                            <img src="{{ asset('siteassets/img/icons/chat.png') }}" alt="">
                             <h4>Online support 24/7</h4>
                             <p>Urna quam, euismod sit amet mollis quis, vestibulum quis velit. Vesti bulum mal esuada
                                 aliquet libero viverra cursus. </p>
@@ -84,10 +64,10 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="single-box-item first-box">
-                                    <img src="{{asset('siteassets/img/f-box-1.jpg')}}" alt="">
+                                    <img src="{{ asset('uploads/categories/'.$categories[2]->image) }}" alt="">
                                     <div class="box-text">
                                         <span class="trend-year">2019 Party</span>
-                                        <h2>Jewelry</h2>
+                                        <h2>{{ $categories[2]->trans_name }}</h2>
                                         <span class="trend-alert">Trend Allert</span>
                                         <a href="#" class="primary-btn">See More</a>
                                     </div>
@@ -95,10 +75,10 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="single-box-item second-box">
-                                    <img src="{{asset('siteassets/img/f-box-2.jpg')}}" alt="">
+                                    <img src="{{ asset('uploads/categories/'.$categories[1]->image) }}" alt="">
                                     <div class="box-text">
                                         <span class="trend-year">2019 Trend</span>
-                                        <h2>Footwear</h2>
+                                        <h2>{{ $categories[1]->trans_name }}</h2>
                                         <span class="trend-alert">Bold & Black</span>
                                     </div>
                                 </div>
@@ -107,10 +87,10 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="single-box-item large-box">
-                            <img src="{{asset('siteassets/img/f-box-3.jpg')}}" alt="">
+                            <img src="{{ asset('uploads/categories/'.$categories[0]->image) }}" alt="">
                             <div class="box-text">
                                 <span class="trend-year">2019 Party</span>
-                                <h2>Collection</h2>
+                                <h2>{{ $categories[0]->trans_name }}</h2>
                                 <div class="trend-alert">Trend Allert</div>
                             </div>
                         </div>
@@ -132,110 +112,35 @@
                         </div>
                         <ul class="product-controls">
                             <li data-filter="*">All</li>
-                            <li data-filter=".dresses">Dresses</li>
-                            <li data-filter=".bags">Bags</li>
-                            <li data-filter=".shoes">Shoes</li>
-                            <li data-filter=".accesories">Accesories</li>
+                            @foreach ($categories as $cat)
+                            <li data-filter=".cat-{{ $cat->id }}">{{ $cat->trans_name }}</li>
+                            @endforeach
+
                         </ul>
                     </div>
                 </div>
             </div>
+
             <div class="row" id="product-list">
-                <div class="col-lg-3 col-sm-6 mix all dresses bags">
+                @foreach ($products as $item )
+                <div class="col-lg-3 col-sm-6 mix all cat-{{ $item->category_id }}">
                     <div class="single-product-item">
                         <figure>
-                            <a href="#"><img src="{{asset('siteassets/img/products/img-1.jpg')}}" alt=""></a>
+                            {{-- {{ $item->category->trans_name }} --}}
+                            <a href="#"><img src="{{ asset('uploads/products/'.$item->image) }}"
+                                    alt=""></a>
                             <div class="p-status">new</div>
                         </figure>
                         <div class="product-text">
-                            <h6>Green Dress with details</h6>
-                            <p>$22.90</p>
+                            <h6>{{ $item->trans_name }}</h6>
+                            <p>${{ $item->salary }}</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6 mix all dresses bags">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="{{asset('siteassets/img/products/img-2.jpg')}}" alt=""></a>
-                            <div class="p-status sale">sale</div>
-                        </figure>
-                        <div class="product-text">
-                            <h6>Yellow Maxi Dress</h6>
-                            <p>$25.90</p>
-                        </div>
-                    </div>
+                @endforeach
+
                 </div>
-                <div class="col-lg-3 col-sm-6 mix all shoes accesories">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="{{asset('siteassets/img/products/img-3.jpg')}}" alt=""></a>
-                            <div class="p-status">new</div>
-                        </figure>
-                        <div class="product-text">
-                            <h6>One piece bodysuit</h6>
-                            <p>$19.90</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 mix all shoes accesories">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="{{asset('siteassets/img/products/img-4.jpg')}}" alt=""></a>
-                            <div class="p-status popular">popular</div>
-                        </figure>
-                        <div class="product-text">
-                            <h6>Blue Dress with details</h6>
-                            <p>$35.50</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 mix all dresses shoes">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="{{asset('siteassets/img/products/img-5.jpg')}}" alt=""></a>
-                            <div class="p-status">new</div>
-                        </figure>
-                        <div class="product-text">
-                            <h6>Green Dress with details</h6>
-                            <p>$22.90</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 mix all accesories bags">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="{{asset('siteassets/img/products/img-6.jpg')}}" alt=""></a>
-                            <div class="p-status sale">sale</div>
-                        </figure>
-                        <div class="product-text">
-                            <h6>Yellow Maxi Dress</h6>
-                            <p>$25.90</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 mix all dresses bags">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="{{asset('siteassets/img/products/img-7.jpg')}}" alt=""></a>
-                        </figure>
-                        <div class="product-text">
-                            <h6>One piece bodysuit</h6>
-                            <p>$19.90</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 mix all accesories bags">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="{{asset('siteassets/img/products/img-8.jpg')}}" alt=""></a>
-                            <div class="p-status popular">popular</div>
-                        </figure>
-                        <div class="product-text">
-                            <h6>Blue Dress with details</h6>
-                            <p>$35.50</p>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </section>
@@ -262,7 +167,7 @@
                 </div>
                 <div class="col-lg-5 offset-lg-1">
                     <div class="lookbok-pic">
-                        <img src="{{asset('siteassets/img/lookbok.jpg')}}" alt="">
+                        <img src="{{ asset('siteassets/img/lookbok.jpg') }}" alt="">
                         <div class="pic-text">fashion</div>
                     </div>
                 </div>
@@ -275,22 +180,22 @@
     <div class="logo-section spad">
         <div class="logo-items owl-carousel">
             <div class="logo-item">
-                <img src="{{asset('siteassets/img/logos/logo-1.png')}}" alt="">
+                <img src="{{ asset('siteassets/img/logos/logo-1.png') }}" alt="">
             </div>
             <div class="logo-item">
-                <img src="{{asset('siteassets/img/logos/logo-2.png')}}" alt="">
+                <img src="{{ asset('siteassets/img/logos/logo-2.png') }}" alt="">
             </div>
             <div class="logo-item">
-                <img src="{{asset('siteassets/img/logos/logo-3.png')}}" alt="">
+                <img src="{{ asset('siteassets/img/logos/logo-3.png') }}" alt="">
             </div>
             <div class="logo-item">
-                <img src="{{asset('siteassets/img/logos/logo-4.png')}}" alt="">
+                <img src="{{ asset('siteassets/img/logos/logo-4.png') }}" alt="">
             </div>
             <div class="logo-item">
-                <img src="{{asset('siteassets/img/logos/logo-5.png')}}" alt="">
+                <img src="{{ asset('siteassets/img/logos/logo-5.png') }}" alt="">
             </div>
         </div>
     </div>
     <!-- Logo Section End -->
 
-    @stop
+@stop

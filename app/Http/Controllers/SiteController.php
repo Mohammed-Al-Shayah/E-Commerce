@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
     public function index()
     {
-        return view('site.index');
+        $slider=Slider::orderByDesc('id')->take(3)->get();
+        $categories=Category::orderByDesc('id')->take(3)->get();
+        $products=product::orderByDesc('id')->get()->take(12);
+        return view('site.index',compact('slider','categories','products'));
     }
 
     public function categories ()

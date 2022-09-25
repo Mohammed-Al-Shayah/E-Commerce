@@ -1,3 +1,6 @@
+@php
+    use App\Models\Category;
+@endphp
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -23,6 +26,13 @@
     <link rel="stylesheet" href="{{asset('siteassets/css/slicknav.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('siteassets/css/style.css')}}" type="text/css">
     @yield('style')
+    <style>
+        .inner-header .main-menu {
+    /* float: right; */
+    margin-right: 10px;
+    float: right;
+}
+    </style>
 
 </head>
 
@@ -53,7 +63,6 @@
                 </div>
                 <div class="header-right">
                     <img src="{{asset('siteassets/img/icons/search.png')}}" alt="" class="search-trigger">
-                    <img src="{{asset('siteassets/img/icons/man.png')}}" alt="">
                     <a href="#">
                         <img src="{{asset('siteassets/img/icons/bag.png')}}" alt="">
                         <span>2</span>
@@ -75,6 +84,13 @@
                         <li><a href="./product-page.html">About</a></li>
                         <li><a href="{{ route('site.checkOut') }}">Check out</a></li>
                         <li><a href="{{ route('site.contact') }}">Contact</a></li>
+                        <li><a>Categories</a>
+                            <ul class="sub-menu">
+                                @foreach (Category::all() as $item )
+                                <li><a  href="{{ route('site.categories')}}">{{ $item->trans_name }}</a></li>
+                                @endforeach
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
             </div>
